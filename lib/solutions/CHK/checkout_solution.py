@@ -30,6 +30,9 @@ class Checkout:
         remaining = count % special_amount
         total_price = special_price * special_count
         return total_price, remaining
+    
+    def calculate_price(self, item, count):
+        return self.prices[item] * count
 
     def calculate_total_price(self, order):
         if not isinstance(order, str):
@@ -58,11 +61,13 @@ class Checkout:
             # total_price += self.prices[item]    
         
         for item in self.special_offers:
-            specials = self.special_offers[item]
-            for offer in specials:
-                total_price, remaining = self.calculate_special(item_count[item], offer)
-                item_count[item] = remaining
-
+            if item in order:
+                specials = self.special_offers[item]
+                for offer in specials:
+                    offer_price, remaining = self.calculate_special(item_count[item], offer)
+                    item_count[item] = remaining
+                    total_price += offer_price
+                total_price += self.calculate_price(item, item_count[item])
 
         return total_price
 
@@ -76,5 +81,6 @@ print(checkout('AAAABBBCCDD') )
 
     
         
+
 
 
