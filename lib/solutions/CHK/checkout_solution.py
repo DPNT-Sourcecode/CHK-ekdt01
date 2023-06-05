@@ -22,6 +22,8 @@ class Checkout:
         }
 
     def calculate_total_price(self, order):
+        if not isinstance(order, str):
+            raise TypeError(f"Expected string, got {type(order).__name__}")
         item_count = {}
         total_price = 0
         for item in order:
@@ -32,6 +34,7 @@ class Checkout:
                 total_price += self.prices[item]
                 continue
 
+            # if on special offer we need to keep track of the number of items and check if special offer needed
             item_count[item] = 1 if item not in item_count else item_count[item] + 1
             special_offer_amount = self.special_offers[item][0]
             special_offer_price = self.special_offers[item][1]
@@ -47,13 +50,14 @@ class Checkout:
 
 
         
-checkout = Checkout()
+# checkout = Checkout()
 
-print(checkout.calculate_total_price('AAAABBBCCDDEE') )
+# print(checkout.calculate_total_price('ABHHFK') )
     
 
     
         
+
 
 
 
