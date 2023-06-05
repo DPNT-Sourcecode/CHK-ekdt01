@@ -11,6 +11,18 @@ class TestCheckout():
         assert checkout('D') == 15
         assert checkout('E') == 40
         assert checkout('F') == 10
+        assert checkout('G') == 20
+        assert checkout('I') == 35
+        assert checkout('J') == 60
+        assert checkout('L') == 90
+        assert checkout('M') == 15
+        assert checkout('O') == 10
+        assert checkout('S') == 30
+        assert checkout('T') == 20
+        assert checkout('W') == 20
+        assert checkout('X') == 90
+        assert checkout('Y') == 10
+        assert checkout('Z') == 50
 
     def test_multiple_items(self):
         assert checkout('AAA') == 130
