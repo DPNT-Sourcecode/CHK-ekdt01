@@ -78,6 +78,13 @@ class Checkout:
     
     def calculate_price(self, item, count):
         return self.prices[item] * count
+    
+    def calculate_special_free_items(self, order):
+        for item in self.special_free_items:
+            if item in order:
+                specials = self.special_free_items[item]
+                for offer in specials:
+                    item_count = self.calculate_special_free_item(item_count, item, offer)
 
     def calculate_total_price(self, order):
         if not isinstance(order, str):
@@ -91,11 +98,8 @@ class Checkout:
             # if on special offer we need to keep track of the number of items and check if special offer needed
             item_count[item] = 1 if item not in item_count else item_count[item] + 1
         
-        for item in self.special_free_items:
-            if item in order:
-                specials = self.special_free_items[item]
-                for offer in specials:
-                    item_count = self.calculate_special_free_item(item_count, item, offer)
+        item_count, total_price = self.calculate_special_free_items(order)
+
 
         for offer in self.multi_special_offers:
             total_count = sum(item_count[key] for key in offer if key in item_count)
@@ -154,3 +158,4 @@ def checkout(skus):
         
 
 print(checkout('CXYZYZC'))
+
