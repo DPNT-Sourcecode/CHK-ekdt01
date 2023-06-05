@@ -42,7 +42,7 @@ class Checkout:
         # have set this in order of most to least expensive 
         # this way it will remove it in that order and best deal for customer
         self.multi_special_offers = {
-            'ZSTYX': [(3, 45)]
+            'ZSTYX': (3, 45)
         }
 
         self.single_special_offers = {
@@ -98,8 +98,30 @@ class Checkout:
                     item_count = self.calculate_special_free_item(item_count, item, offer)
 
         for offer in self.multi_special_offers:
-            for item in offer:
-                self.calculate_special()
+            total_count = sum(item_count[key] for key in offer)
+
+            offer_price, remaining = self.calculate_special(total_count, self.multi_special_offers[offer])
+            
+            item_price_order = list(offer)
+            item_price_order.sort(key = lambda x: self.prices[x])
+            
+            for item in item_price_order:
+                
+                if remaining <= 0:
+                    break
+                
+                if item_count[item] < remaining:
+                    offer_price += self.prices[item] * item_count[item]
+                    item_count[item] = 0
+                    remaining -= item_count[item]
+                else:
+                    offer_price += self.prices[item] * remaining
+                    item_count[item] -= remaining
+                    remaining = 0
+
+            for item in item_price_order:
+                item_count[item] = 0
+
 
         # we need to make sure the special offers are in order of the best value per item
         for item in self.single_special_offers:
@@ -125,7 +147,8 @@ def checkout(skus):
     price = checkout.calculate_total_price(skus)
     return price 
         
-# print(checkout("A"))
+print(checkout("SSTTXYYYZZ"))
+
 
 
 
