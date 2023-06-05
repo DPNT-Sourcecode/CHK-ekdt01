@@ -120,7 +120,8 @@ def checkout(skus):
 # print(checkout("B"))
 # print(checkout("C"))
 # print(checkout("D"))
-print(checkout("FFF"))
+# print(checkout("EEEEBBBB"))
+
 
 
 

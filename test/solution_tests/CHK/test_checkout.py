@@ -63,6 +63,11 @@ class TestCheckout():
         assert checkout('QQQ') == 80 
         assert checkout('U') == 40
         assert checkout('UUU') == 120
+        assert checkout('UUUU') == 120
         assert checkout('V') == 50
         assert checkout('VV') == 90 
         assert checkout('VVV') == 130 
+
+    def test_combined_specials(self):
+        assert checkout('EEEEBBBB') == 40 * 4 + 45
+
