@@ -26,6 +26,12 @@ class Checkout:
         remaining = count % special_amount
         total_price = special_price * special_count
         return total_price, remaining
+
+    def calculate_special_free_item(self, item_count, item, special):
+        count = item_count[item]
+        special_amount, free_item = special
+        special_count = math.floor(count / special_amount)
+        item_count[free_item] = max(0, item_count[free_item] - special_count)
     
     def calculate_price(self, item, count):
         return self.prices[item] * count
@@ -52,7 +58,8 @@ class Checkout:
                         item_count[item] = remaining
                         total_price += offer_price
                     else:
-                        
+                        self.calculate_special_free_item(item_count, item, offer)
+
                 total_price += self.calculate_price(item, item_count[item])
 
 
@@ -66,5 +73,6 @@ def checkout(skus):
     price = checkout.calculate_total_price(skus)
     return price 
         
+
 
 
