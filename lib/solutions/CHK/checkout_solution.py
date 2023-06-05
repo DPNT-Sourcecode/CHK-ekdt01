@@ -48,18 +48,9 @@ class Checkout:
                 continue
 
             # if on special offer we need to keep track of the number of items and check if special offer needed
-            item_count[item] = 1 if item not in item_count else item_count[item] + 1
-            # special_offer_amount = self.special_offers[item][0]
-            # special_offer_price = self.special_offers[item][1]
-
-            # # special offer needed
-            # if item_count[item] != 0 and item_count[item] % special_offer_amount == 0:
-            #     total_price += special_offer_price - ( special_offer_amount - 1 ) * self.prices[item]
-            #     continue
-
-            # # special offer not needed yet
-            # total_price += self.prices[item]    
+            item_count[item] = 1 if item not in item_count else item_count[item] + 1  
         
+        # we need to make sure the special offers are in order of the best value per item
         for item in self.special_offers:
             if item in order:
                 specials = self.special_offers[item]
@@ -76,11 +67,12 @@ class Checkout:
         
 # checkout = Checkout()
 
-print(checkout('AAAABBBCCDD') )
+print(checkout('AAAAAAAACCAEE') )
     
 
     
         
+
 
 
 
