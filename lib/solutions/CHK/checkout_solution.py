@@ -14,7 +14,7 @@ class Checkout:
         self.special_offers = {
             'A':[(3, 130), (5, 200)],
             'B':[(2, 45)],
-            'E':[(3, 80)]
+            'E':[(2, 'B')]
         }
 
         for offer in self.special_offers:
@@ -38,10 +38,6 @@ class Checkout:
         for item in order:
             if item not in self.prices:
                 return -1
-            
-            if item not in self.special_offers:
-                total_price += self.prices[item]
-                continue
 
             # if on special offer we need to keep track of the number of items and check if special offer needed
             item_count[item] = 1 if item not in item_count else item_count[item] + 1  
@@ -51,10 +47,14 @@ class Checkout:
             if item in order:
                 specials = self.special_offers[item]
                 for offer in specials:
-                    offer_price, remaining = self.calculate_special(item_count[item], offer)
-                    item_count[item] = remaining
-                    total_price += offer_price
+                    if type(offer[1] is int):
+                        offer_price, remaining = self.calculate_special(item_count[item], offer)
+                        item_count[item] = remaining
+                        total_price += offer_price
+                    else:
+                        
                 total_price += self.calculate_price(item, item_count[item])
+
 
         return total_price
 
@@ -66,4 +66,5 @@ def checkout(skus):
     price = checkout.calculate_total_price(skus)
     return price 
         
+
 
