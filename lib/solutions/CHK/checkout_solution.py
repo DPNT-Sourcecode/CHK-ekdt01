@@ -153,5 +153,6 @@ def checkout(skus):
     return price 
         
 
+print(checkout('CXYZYZC'))
 
 
