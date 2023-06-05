@@ -17,14 +17,14 @@ class TestCheckout():
         assert checkout('AAAAAAAAA') == 380
         assert checkout('CCCC') == 80
         assert checkout('DD') == 30
-        assert checkout('EEEE') == 120
+        assert checkout('EEEE') == 160
 
     def test_invalid(self):
         assert checkout('Z') == -1
 
     def test_free_items(self):
         assert checkout('EEB') == 80
-        assert checkout('EEEB') == 110
-        assert checkout('EEEEBB') == 165
+        assert checkout('EEEB') == 120
+        assert checkout('EEEEBB') == 160
 
         

@@ -34,7 +34,9 @@ class Checkout:
         count = item_count[item]
         special_amount, free_item = special
         special_count = math.floor(count / special_amount)
-        item_count[free_item] = max(0, item_count[free_item] - special_count)
+        if free_item in item_count:
+            item_count[free_item] = max(0, item_count[free_item] - special_count)
+
         return item_count
     
     def calculate_price(self, item, count):
@@ -83,4 +85,8 @@ def checkout(skus):
     price = checkout.calculate_total_price(skus)
     return price 
         
-print(checkout("EEEB"))
+# print(checkout("A"))
+# print(checkout("B"))
+# print(checkout("C"))
+# print(checkout("D"))
+# print(checkout("EE"))
