@@ -19,10 +19,13 @@ class Checkout:
         }
 
         self.special_offers = {
-            'A':[(5, 200), (3, 130)],
+            'A':[(3, 130), (5, 200)],
             'B':[(2, 45)],
             'E':[(3, 80)]
         }
+
+        for offer in self.special_offers:
+            self.special_offers[offer].sort(key = lambda x: x[1] / x[0])
 
     def calculate_special(self, count, special):
         special_amount, special_price = special
@@ -72,6 +75,7 @@ print(checkout('AAAAAAAACCAEE') )
 
     
         
+
 
 
 
