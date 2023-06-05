@@ -98,7 +98,7 @@ class Checkout:
                     item_count = self.calculate_special_free_item(item_count, item, offer)
 
         for offer in self.multi_special_offers:
-            total_count = sum(item_count[key] for key in offer)
+            total_count = sum(item_count[key] for key in offer if key in item_count)
 
             offer_price, remaining = self.calculate_special(total_count, self.multi_special_offers[offer])
             
@@ -121,6 +121,8 @@ class Checkout:
 
             for item in item_price_order:
                 item_count[item] = 0
+            
+            total_price += offer_price
 
 
         # we need to make sure the special offers are in order of the best value per item
@@ -147,9 +149,5 @@ def checkout(skus):
     price = checkout.calculate_total_price(skus)
     return price 
         
-print(checkout("SSTTXYYYYZZ"))
-
-
-
-
+print(checkout("X"))
 

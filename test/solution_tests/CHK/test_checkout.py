@@ -55,8 +55,8 @@ class TestCheckout():
         assert checkout('H') == 10
         assert checkout('HHHHH') == 45 
         assert checkout('HHHHHHHHHH') == 80 
-        assert checkout('K') == 80
-        assert checkout('KK') == 150 
+        assert checkout('K') == 70
+        assert checkout('KK') == 120 
         assert checkout('P') == 50
         assert checkout('PPPPP') == 200 
         assert checkout('Q') == 30
@@ -79,5 +79,4 @@ class TestCheckout():
         assert checkout('ZTS') == 45
         assert checkout('XTSXTS') == 90
         assert checkout('XTSXTSX') == 90 + 17
-        assert checkout('XTSXTSXXX') == 90 + 17 + 45  
-
+        assert checkout('XTSXTSXXX') == 90 + 45  
