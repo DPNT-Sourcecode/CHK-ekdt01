@@ -33,7 +33,7 @@ class TestCheckout():
         assert checkout('EEEE') == 160
 
     def test_invalid(self):
-        assert checkout('Z') == -1
+        assert checkout('9') == -1
 
     def test_free_items(self):
         assert checkout('EEB') == 80
@@ -50,3 +50,19 @@ class TestCheckout():
     def test_multiple_different_items_with_F(self):
         assert checkout('ABCF') == 50 + 30 + 20 + 10
         assert checkout('ABCDEFFF') == 50 + 30 + 20 + 15 + 40 + 20
+
+    def test_single_item_with_special(self):
+        assert checkout('H') == 10
+        assert checkout('HHHHH') == 45 
+        assert checkout('HHHHHHHHHH') == 80 
+        assert checkout('K') == 80
+        assert checkout('KK') == 150 
+        assert checkout('P') == 50
+        assert checkout('PPPPP') == 200 
+        assert checkout('Q') == 30
+        assert checkout('QQQ') == 80 
+        assert checkout('U') == 40
+        assert checkout('UUU') == 120
+        assert checkout('V') == 50
+        assert checkout('VV') == 90 
+        assert checkout('VVV') == 130 
