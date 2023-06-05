@@ -67,7 +67,10 @@ class TestCheckout():
         assert checkout('V') == 50
         assert checkout('VV') == 90 
         assert checkout('VVV') == 130 
+        assert checkout('VVVV') == 180
+        assert checkout('VVVVV') == 220
 
     def test_combined_specials(self):
         assert checkout('EEEEBBBB') == 40 * 4 + 45
+
 

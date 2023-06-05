@@ -117,10 +117,8 @@ def checkout(skus):
     return price 
         
 # print(checkout("A"))
-# print(checkout("B"))
-# print(checkout("C"))
-# print(checkout("D"))
-# print(checkout("EEEEBBBB"))
+
+
 
 
 
