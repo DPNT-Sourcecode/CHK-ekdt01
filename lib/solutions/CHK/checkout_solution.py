@@ -61,8 +61,3 @@ class Checkout:
     
         
 
-
-
-
-
-
