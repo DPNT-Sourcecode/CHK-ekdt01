@@ -35,12 +35,19 @@ class Checkout:
 
         self.special_free_items = {
             'E':[(2, 'B')],
+            'N':[(3, 'M')],
+            'R':[(3, 'Q')],
         }
 
         self.special_offers = {
             'A':[(3, 130), (5, 200)],
             'B':[(2, 45)],
-            'F':[(3, 20)]
+            'F':[(3, 20)],
+            'H':[(5, 45), (10, 80)],
+            'K':[(2, 150)],
+            'P':[(5, 200)],
+            'Q':[(3, 80)],
+            'U':[(4, 3 * self.prices['U'])],
         }
 
         for offer in self.special_offers:
@@ -113,4 +120,5 @@ def checkout(skus):
 # print(checkout("C"))
 # print(checkout("D"))
 print(checkout("FFF"))
+
 
