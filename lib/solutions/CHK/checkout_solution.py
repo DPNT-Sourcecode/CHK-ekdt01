@@ -118,8 +118,3 @@ def checkout(skus):
         
 # print(checkout("A"))
 
-
-
-
-
-

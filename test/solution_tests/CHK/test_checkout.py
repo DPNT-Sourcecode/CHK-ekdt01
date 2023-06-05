@@ -72,5 +72,3 @@ class TestCheckout():
 
     def test_combined_specials(self):
         assert checkout('EEEEBBBB') == 40 * 4 + 45
-
-
