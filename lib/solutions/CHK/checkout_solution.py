@@ -79,7 +79,7 @@ class Checkout:
     def calculate_price(self, item, count):
         return self.prices[item] * count
     
-    def calculate_special_free_item_offers(self, order):
+    def calculate_special_free_item_offers(self, order, item_count):
         for item in self.special_free_items:
             if item in order:
                 specials = self.special_free_items[item]
@@ -118,6 +118,18 @@ class Checkout:
             
             total_price += offer_price
         return item_count, total_price
+    
+    def calculate_single_item_special_offers(self, item_count, total_price, order):
+        # we need to make sure the special offers are in order of the best value per item
+        for item in self.single_special_offers:
+            if item in order:
+                specials = self.single_special_offers[item]
+                for offer in specials:
+                    offer_price, remaining = self.calculate_special(item_count[item], offer)
+                    item_count[item] = remaining
+                    total_price += offer_price
+        return item_count, total_price
+
 
     def calculate_total_price(self, order):
         if not isinstance(order, str):
@@ -131,55 +143,14 @@ class Checkout:
             # if on special offer we need to keep track of the number of items and check if special offer needed
             item_count[item] = 1 if item not in item_count else item_count[item] + 1
         
-        item_count = self.calculate_special_free_item_offers(order)
+        item_count = self.calculate_special_free_item_offers(order, item_count)
         item_count, total_price = self.calculate_special_multi_item_offers(item_count, total_price)
+        item_count, total_price = self.calculate_single_item_special_offers(item_count, total_price, order)
 
-
-
-        for offer in self.multi_special_offers:
-            total_count = sum(item_count[key] for key in offer if key in item_count)
-
-            offer_price, remaining = self.calculate_special(total_count, self.multi_special_offers[offer])
-            
-            item_price_order = list(offer)
-            item_price_order.sort(key = lambda x: self.prices[x])
-            
-            for item in item_price_order:
-                
-                if remaining <= 0:
-                    break
-
-                if item not in item_count:
-                    continue
-                
-                if item_count[item] < remaining:
-                    offer_price += self.prices[item] * item_count[item]
-                    remaining -= item_count[item]
-                    item_count[item] = 0
-                else:
-                    offer_price += self.prices[item] * remaining
-                    item_count[item] -= remaining
-                    remaining = 0
-
-            for item in item_price_order:
-                item_count[item] = 0
-            
-            total_price += offer_price
-
-
-        # we need to make sure the special offers are in order of the best value per item
-        for item in self.single_special_offers:
-            if item in order:
-                specials = self.single_special_offers[item]
-                for offer in specials:
-                    offer_price, remaining = self.calculate_special(item_count[item], offer)
-                    item_count[item] = remaining
-                    total_price += offer_price
-
+        # calculate remaining price for items left after offers 
         for item in self.prices:
             if item in item_count:
                 total_price += self.calculate_price(item, item_count[item])
-
 
         return total_price
 
@@ -190,8 +161,5 @@ def checkout(skus):
     checkout = Checkout()
     price = checkout.calculate_total_price(skus)
     return price 
-        
-
-print(checkout('CXYZYZC'))
 
 
