@@ -22,4 +22,9 @@ class TestCheckout():
     def test_invalid(self):
         assert checkout('Z') == -1
 
+    def test_free_items(self):
+        assert checkout('EEB') == 80
+        assert checkout('EEEB') == 110
+        assert checkout('EEEEBB') == 165
+
         

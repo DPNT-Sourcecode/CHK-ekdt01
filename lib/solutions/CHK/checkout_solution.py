@@ -50,7 +50,7 @@ class Checkout:
                 return -1
 
             # if on special offer we need to keep track of the number of items and check if special offer needed
-            item_count[item] = 1 if item not in item_count else item_count[item] + 1  
+            item_count[item] = 1 if item not in item_count else item_count[item] + 1
         
         for item in self.special_free_items:
             if item in order:
@@ -68,7 +68,8 @@ class Checkout:
                     item_count[item] = remaining
                     total_price += offer_price
 
-
+        for item in self.prices:
+            if item in item_count:
                 total_price += self.calculate_price(item, item_count[item])
 
 
