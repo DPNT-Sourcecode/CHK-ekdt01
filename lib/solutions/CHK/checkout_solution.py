@@ -115,8 +115,8 @@ class Checkout:
                 
                 if item_count[item] < remaining:
                     offer_price += self.prices[item] * item_count[item]
-                    item_count[item] = 0
                     remaining -= item_count[item]
+                    item_count[item] = 0
                 else:
                     offer_price += self.prices[item] * remaining
                     item_count[item] -= remaining
