@@ -19,7 +19,7 @@ class Checkout:
         self.special_offers = {
             'A':[(3, 130), (5, 200)],
             'B':[(2, 45)],
-            'F':[(2, 20)]
+            'F':[(3, 20)]
         }
 
         for offer in self.special_offers:

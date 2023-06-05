@@ -32,7 +32,7 @@ class TestCheckout():
         assert checkout('FF') == 20
         assert checkout('FFF') == 20
         assert checkout('FFFF') == 30
-        assert checkout('FFFFF') == 30
+        assert checkout('FFFFF') == 40
         assert checkout('FFFFFF') == 40
 
         
