@@ -17,12 +17,12 @@ class TestCheckout():
         assert checkout('L') == 90
         assert checkout('M') == 15
         assert checkout('O') == 10
-        assert checkout('S') == 30
+        assert checkout('S') == 20
         assert checkout('T') == 20
         assert checkout('W') == 20
-        assert checkout('X') == 90
-        assert checkout('Y') == 10
-        assert checkout('Z') == 50
+        assert checkout('X') == 17
+        assert checkout('Y') == 20
+        assert checkout('Z') == 21
 
     def test_multiple_items(self):
         assert checkout('AAA') == 130
@@ -80,3 +80,7 @@ class TestCheckout():
         assert checkout('XTSXTS') == 90
         assert checkout('XTSXTSX') == 90 + 17
         assert checkout('XTSXTSXXX') == 90 + 45  
+        assert checkout('XXXXZ') == 45 + ( 17 * 2 )  
+        assert checkout('XXXSZ') == 45 + ( 17 * 2 )  
+        assert checkout('XXXSX') == 45 + ( 17 * 2 )  
+

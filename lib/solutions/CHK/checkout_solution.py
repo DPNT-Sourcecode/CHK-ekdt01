@@ -152,23 +152,6 @@ def checkout(skus):
     price = checkout.calculate_total_price(skus)
     return price 
         
-print(checkout('A') )
-print(checkout('B') )
-print(checkout('C') )
-print(checkout('D') )
-print(checkout('E') )
-print(checkout('F') )
-print(checkout('G') )
-print(checkout('I') )
-print(checkout('J') )
-print(checkout('L') )
-print(checkout('M') )
-print(checkout('O') )
-print(checkout('S') )
-print(checkout('T') )
-print(checkout('W') )
-print(checkout('X') )
-print(checkout('Y') )
-print(checkout('Z') )
+
 
 
