@@ -91,5 +91,5 @@ def checkout(skus):
 # print(checkout("B"))
 # print(checkout("C"))
 # print(checkout("D"))
-# print(checkout("EE"))
+print(checkout("FFF"))
 

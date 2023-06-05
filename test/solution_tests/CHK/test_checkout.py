@@ -10,6 +10,7 @@ class TestCheckout():
         assert checkout('C') == 20
         assert checkout('D') == 15
         assert checkout('E') == 40
+        assert checkout('F') == 10
 
     def test_multiple_items(self):
         assert checkout('AAA') == 130
@@ -26,5 +27,12 @@ class TestCheckout():
         assert checkout('EEB') == 80
         assert checkout('EEEB') == 120
         assert checkout('EEEEBB') == 160
+
+    def test_multiple_fs(self):
+        assert checkout('FF') == 20
+        assert checkout('FFF') == 20
+        assert checkout('FFFF') == 30
+        assert checkout('FFFFF') == 30
+        assert checkout('FFFFFF') == 40
 
         
