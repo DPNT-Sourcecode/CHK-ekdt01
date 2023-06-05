@@ -11,10 +11,13 @@ class Checkout:
             'E':40
         }
 
+        self.special_free_items = {
+            'E':[(2, 'B')]
+        }
+
         self.special_offers = {
             'A':[(3, 130), (5, 200)],
             'B':[(2, 45)],
-            'E':[(2, 'B')]
         }
 
         for offer in self.special_offers:
@@ -32,6 +35,7 @@ class Checkout:
         special_amount, free_item = special
         special_count = math.floor(count / special_amount)
         item_count[free_item] = max(0, item_count[free_item] - special_count)
+        return item_count
     
     def calculate_price(self, item, count):
         return self.prices[item] * count
@@ -48,17 +52,22 @@ class Checkout:
             # if on special offer we need to keep track of the number of items and check if special offer needed
             item_count[item] = 1 if item not in item_count else item_count[item] + 1  
         
+        for item in self.special_free_items:
+            if item in order:
+                specials = self.special_free_items[item]
+                for offer in specials:
+                    item_count = self.calculate_special_free_item(item_count, item, offer)
+
+
         # we need to make sure the special offers are in order of the best value per item
         for item in self.special_offers:
             if item in order:
                 specials = self.special_offers[item]
                 for offer in specials:
-                    if type(offer[1] is int):
-                        offer_price, remaining = self.calculate_special(item_count[item], offer)
-                        item_count[item] = remaining
-                        total_price += offer_price
-                    else:
-                        self.calculate_special_free_item(item_count, item, offer)
+                    offer_price, remaining = self.calculate_special(item_count[item], offer)
+                    item_count[item] = remaining
+                    total_price += offer_price
+
 
                 total_price += self.calculate_price(item, item_count[item])
 
@@ -73,6 +82,7 @@ def checkout(skus):
     price = checkout.calculate_total_price(skus)
     return price 
         
+print(checkout("AAABEE"))
 
 
 
