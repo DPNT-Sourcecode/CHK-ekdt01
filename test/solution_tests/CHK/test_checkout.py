@@ -72,3 +72,12 @@ class TestCheckout():
 
     def test_combined_specials(self):
         assert checkout('EEEEBBBB') == 40 * 4 + 45
+
+    def test_multi_special_offers(self):
+        assert checkout('STX') == 45
+        assert checkout('YZS') == 45
+        assert checkout('ZTS') == 45
+        assert checkout('XTSXTS') == 90
+        assert checkout('XTSXTSX') == 90 + 17
+        assert checkout('XTSXTSXXX') == 90 + 17 + 45  
+

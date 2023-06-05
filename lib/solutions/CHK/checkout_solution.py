@@ -147,7 +147,8 @@ def checkout(skus):
     price = checkout.calculate_total_price(skus)
     return price 
         
-print(checkout("SSTTXYYYZZ"))
+print(checkout("SSTTXYYYYZZ"))
+
 
 
 
