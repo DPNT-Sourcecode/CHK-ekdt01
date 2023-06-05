@@ -3,13 +3,8 @@ import math
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    legal_items = ['A', 'B', 'C', 'D']
-    item_count = {}
-    for item in skus:
-        if item not in legal_items:
-            return -1
-        
-        item_count[item] = 1 if item not in item_count else item_count[item] + 1
+    checkout = Checkout()
+    price = checkout.calculate_total_price(skus)
 
 
 class Checkout:
@@ -34,7 +29,7 @@ class Checkout:
                 return -1
             
             if item not in self.special_offers:
-                total_price += item * self.prices[item]
+                total_price += self.prices[item]
                 continue
 
             item_count[item] = 1 if item not in item_count else item_count[item] + 1
@@ -52,11 +47,14 @@ class Checkout:
 
 
         
-Checkout().calculate_total_price("AAAABBB")
+checkout = Checkout()
+
+print(checkout.calculate_total_price('AAAABBBCCDDEE') )
     
 
     
         
+
 
 
 
