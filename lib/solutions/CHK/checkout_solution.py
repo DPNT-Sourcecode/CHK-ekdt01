@@ -92,4 +92,3 @@ def checkout(skus):
 # print(checkout("C"))
 # print(checkout("D"))
 print(checkout("FFF"))
-
