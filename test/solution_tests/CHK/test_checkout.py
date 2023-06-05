@@ -35,4 +35,6 @@ class TestCheckout():
         assert checkout('FFFFF') == 40
         assert checkout('FFFFFF') == 40
 
-        
+    def test_multiple_different_items_with_F(self):
+        assert checkout('ABCF') == 50 + 30 + 20 + 10
+        assert checkout('ABCDEFFF') == 50 + 30 + 20 + 15 + 40 + 20
