@@ -39,8 +39,10 @@ class Checkout:
             'R':[(3, 'Q')],
         }
 
+        # have set this in order of most to least expensive 
+        # this way it will remove it in that order and best deal for customer
         self.multi_special_offers = {
-            'STXYZ': (3, 45)
+            'ZSTYX': [(3, 45)]
         }
 
         self.single_special_offers = {
@@ -95,6 +97,9 @@ class Checkout:
                 for offer in specials:
                     item_count = self.calculate_special_free_item(item_count, item, offer)
 
+        for offer in self.multi_special_offers:
+            for item in offer:
+                self.calculate_special()
 
         # we need to make sure the special offers are in order of the best value per item
         for item in self.single_special_offers:
@@ -121,5 +126,6 @@ def checkout(skus):
     return price 
         
 # print(checkout("A"))
+
 
 
