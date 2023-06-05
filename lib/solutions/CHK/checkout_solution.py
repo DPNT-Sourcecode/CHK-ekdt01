@@ -14,12 +14,14 @@ class Checkout:
             'A':50,
             'B':30,
             'C':20,
-            'D':15
+            'D':15,
+            'E':40
         }
 
         self.special_offers = {
-            'A':(3, 130),
-            'B':(2, 45)
+            'A':[(5, 200), (3, 130)],
+            'B':(2, 45),
+            'E':(3, 80)
         }
 
     def calculate_total_price(self, order):
@@ -46,7 +48,7 @@ class Checkout:
                 continue
 
             # special offer not needed yet
-            total_price += self.prices[item]            
+            total_price += self.prices[item]    
 
         return total_price
 
@@ -60,4 +62,5 @@ class Checkout:
 
     
         
+
 
