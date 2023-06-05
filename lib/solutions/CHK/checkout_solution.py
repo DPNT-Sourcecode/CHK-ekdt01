@@ -14,7 +14,7 @@ class Checkout:
             'H':10,
             'I':35,
             'J':60,
-            'K':80,
+            'K':70,
             'L':90,
             'M':15,
             'N':40,
@@ -22,14 +22,14 @@ class Checkout:
             'P':50,
             'Q':30,
             'R':50,
-            'S':30,
+            'S':20,
             'T':20,
             'U':40,
             'V':50,
             'W':20,
-            'X':90,
-            'Y':10,
-            'Z':50
+            'X':17,
+            'Y':20,
+            'Z':21
         }
         
 
@@ -39,20 +39,24 @@ class Checkout:
             'R':[(3, 'Q')],
         }
 
-        self.special_offers = {
+        self.multi_special_offers = {
+            'STXYZ': (3, 45)
+        }
+
+        self.single_special_offers = {
             'A':[(3, 130), (5, 200)],
             'B':[(2, 45)],
             'F':[(3, 2 * self.prices['F'])],
             'H':[(5, 45), (10, 80)],
-            'K':[(2, 150)],
+            'K':[(2, 120)],
             'P':[(5, 200)],
             'Q':[(3, 80)],
             'U':[(4, 3 * self.prices['U'])],
             'V':[(2, 90), (3, 130)],
         }
 
-        for offer in self.special_offers:
-            self.special_offers[offer].sort(key = lambda x: x[1] / x[0])
+        for offer in self.single_special_offers:
+            self.single_special_offers[offer].sort(key = lambda x: x[1] / x[0])
 
     def calculate_special(self, count, special):
         special_amount, special_price = special
@@ -93,9 +97,9 @@ class Checkout:
 
 
         # we need to make sure the special offers are in order of the best value per item
-        for item in self.special_offers:
+        for item in self.single_special_offers:
             if item in order:
-                specials = self.special_offers[item]
+                specials = self.single_special_offers[item]
                 for offer in specials:
                     offer_price, remaining = self.calculate_special(item_count[item], offer)
                     item_count[item] = remaining
@@ -117,4 +121,5 @@ def checkout(skus):
     return price 
         
 # print(checkout("A"))
+
 
