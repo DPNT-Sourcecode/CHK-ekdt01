@@ -1,12 +1,5 @@
 import math
 
-# noinspection PyUnusedLocal
-# skus = unicode string
-def checkout(skus):
-    checkout = Checkout()
-    price = checkout.calculate_total_price(skus)
-    return price
-
 
 class Checkout:
     def __init__(self) -> None:
@@ -66,15 +59,14 @@ class Checkout:
         return total_price
 
 
-
+# noinspection PyUnusedLocal
+# skus = unicode string
+def checkout(skus):
+    checkout = Checkout()
+    price = checkout.calculate_total_price(skus)
+    return price 
         
-# checkout = Checkout()
 
-print(checkout('AAAAAAAACCAEE') )
-    
-
-    
-        
 
 
 
