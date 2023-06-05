@@ -5,6 +5,7 @@ import math
 def checkout(skus):
     checkout = Checkout()
     price = checkout.calculate_total_price(skus)
+    return price
 
 
 class Checkout:
@@ -38,12 +39,14 @@ class Checkout:
             item_count[item] = 1 if item not in item_count else item_count[item] + 1
             special_offer_amount = self.special_offers[item][0]
             special_offer_price = self.special_offers[item][1]
+
+            # special offer needed
             if item_count[item] != 0 and item_count[item] % special_offer_amount == 0:
-                price_amount_to_add = special_offer_price - ( special_offer_amount - 1 ) * self.prices[item]
-            else:
-                price_amount_to_add = self.prices[item]
-            
-            total_price += price_amount_to_add
+                total_price += special_offer_price - ( special_offer_amount - 1 ) * self.prices[item]
+                continue
+
+            # special offer not needed yet
+            total_price += self.prices[item]            
 
         return total_price
 
@@ -52,11 +55,12 @@ class Checkout:
         
 # checkout = Checkout()
 
-# print(checkout.calculate_total_price('ABHHFK') )
+# print(checkout('AAAABBBCCDD') )
     
 
     
         
+
 
 
 
