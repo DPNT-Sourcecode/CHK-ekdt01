@@ -83,4 +83,3 @@ class TestCheckout():
         assert checkout('XXXXZ') == 45 + ( 17 * 2 )  
         assert checkout('XXXSZ') == 45 + ( 17 * 2 )  
         assert checkout('XXXSX') == 45 + ( 17 * 2 )  
-
