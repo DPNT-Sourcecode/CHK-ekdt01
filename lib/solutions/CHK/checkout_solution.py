@@ -13,7 +13,7 @@ def checkout(skus):
 
 
 class Checkout:
-    def __init__(self, order) -> None:
+    def __init__(self) -> None:
         self.prices = {
             'A':50,
             'B':30,
@@ -26,12 +26,10 @@ class Checkout:
             'B':(2, 45)
         }
 
-        self.skus = order
-
-    def calculate_total_price(self):
+    def calculate_total_price(self, order):
         item_count = {}
         total_price = 0
-        for item in self.skus:
+        for item in order:
             if item not in self.prices:
                 return -1
             
@@ -49,13 +47,16 @@ class Checkout:
             
             total_price += price_amount_to_add
 
+        return total_price
+
 
 
         
-
+Checkout().calculate_total_price("AAAABBB")
     
 
     
         
+
 
 
